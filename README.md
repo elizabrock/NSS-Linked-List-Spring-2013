@@ -3,7 +3,7 @@ NSS-Linked-List
 
 This is the exercise for week 2 day 3.
 
-Instructons
+Instructions
 -----------
 
   1. Read about unit testing at the following links:
