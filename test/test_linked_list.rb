@@ -122,7 +122,7 @@ class LinkedListItemTest < Test::Unit::TestCase
 
     # assert_equal '| foo, bar |', ll.to_s
     ll.remove(1)
-    
+
     assert_equal '| foo, grille |', ll.to_s
   end
 
@@ -156,7 +156,7 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll.add_item("dog")
     ll.add_item("elephant")
     ll.remove(4)
-
+    
     assert_equal '| foo, bar, grille, dog |', ll.to_s
   end
 

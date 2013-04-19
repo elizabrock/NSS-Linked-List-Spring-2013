@@ -123,21 +123,17 @@ class LinkedList
       end
     end
 
-    if n > 1
-      (n - 2).times do
+    if n > 0
+      (n - 1).times do
         if current_item != nil
           current_item = current_item.next_list_item 
         else
           raise IndexError
         end
       end
-      current_item = current_item.next_list_item
       current_item.next_list_item = new_next_item
-    elsif n == 0
-      @first_item = new_next_item
     else
-      
-      @first_item.next_list_item = new_next_item
+      @first_item = new_next_item
     end
   end
 end
