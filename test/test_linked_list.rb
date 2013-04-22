@@ -84,8 +84,9 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll = LinkedList.new
     ll.add_item("foo")
     ll.add_item("bar")
+    ll.add_item(nil)
     ll.add_item("grille")
-    assert_equal("grille", ll[2])
+    assert_equal(nil, ll[2])
   end
 
   def test_19_bracket_assignment
@@ -99,8 +100,8 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll.add_item("foo")
     ll.add_item("bar")
     ll.add_item("grille")
-    ll[1] = "bar-be-que"
-    assert_equal '| foo, bar-be-que, grille |', ll.to_s
+    ll[1] = "barbecue"
+    assert_equal '| foo, barbecue, grille |', ll.to_s
   end
 
   def test_21_remove_item_changes_size
