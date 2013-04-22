@@ -4,11 +4,9 @@ class LinkedList
   attr_reader :first_item
 
   def initialize *args
-    if args != []
-      args.each do | arg | 
-        self.add_item arg 
-      end  
-    end
+    args.each do | arg | 
+      add_item arg 
+    end  
   end
 
   def add_item payload 
@@ -17,26 +15,30 @@ class LinkedList
       @first_item = next_item
     else
       final_item = @first_item
-      while !final_item.last?
+      until final_item.last?
         final_item = final_item.next_list_item
       end
         final_item.next_list_item = next_item
     end
   end
 
-  def get n 
+  def find_item n
     current_item = @first_item
     n.times do
-      raise IndexError if n == 0 || current_item == nil 
+      raise IndexError if current_item.nil? 
       current_item = current_item.next_list_item 
     end
-    current_item.payload
+    current_item
+  end
+
+  def get n 
+    find_item( n ).payload
   end
 
   def last
-    if @first_item != nil
+    unless @first_item.nil?
       final_item = @first_item
-      while !final_item.last?
+      until final_item.last?
         final_item = final_item.next_list_item
       end
       final_item.payload
@@ -45,7 +47,7 @@ class LinkedList
 
   def size
     list_length, current_item = 0, @first_item
-    while current_item != nil
+    until current_item.nil?
       current_item = current_item.next_list_item 
       list_length += 1
     end
@@ -66,44 +68,29 @@ class LinkedList
   # ========= Bonus ========== #
 
   def [] n
-    self.get n
+    get n
   end
 
   def []= n, payload
-    new_item, current_item, item_after_new  = LinkedListItem.new( payload ), @first_item, @first_item
-    (n + 1).times do
-      raise IndexError if n == 0 || item_after_new == nil 
-      item_after_new = item_after_new.next_list_item 
-    end
-
-    if n != 0
-      (n - 1).times do
-        raise IndexError if n == 0 || current_item == nil 
-        current_item = current_item.next_list_item 
-      end
-      current_item.next_list_item = new_item
-    else
-      @first_item = new_item
-    end
-    new_item.next_list_item = item_after_new
+    find_item( n ).payload = payload
   end
 
   def remove n
-    new_next_item, current_item  =  @first_item, @first_item
+    next_item, prev_item  =  @first_item, @first_item
 
-    (n + 1).times do
-      raise IndexError if new_next_item == nil
-      new_next_item = new_next_item.next_list_item 
+    ( n + 1 ).times do
+      raise IndexError if next_item == nil
+      next_item = next_item.next_list_item 
     end
 
     if n > 0
-      (n - 1).times do
-        raise IndexError if current_item == nil
-        current_item = current_item.next_list_item 
+      ( n - 1 ).times do
+        raise IndexError if prev_item == nil
+        prev_item = prev_item.next_list_item 
       end
-      current_item.next_list_item = new_next_item
+      prev_item.next_list_item = next_item
     else
-      @first_item = new_next_item
+      @first_item = next_item
     end
   end
 end

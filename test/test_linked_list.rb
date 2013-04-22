@@ -137,7 +137,7 @@ class LinkedListItemTest < Test::Unit::TestCase
   end
 
   def test_24_remove_item_from_middle_of_list
-    ll = LinkedList.new
+    ll = LinkedList.new 
     ll.add_item("foo")
     ll.add_item("bar")
     ll.add_item("grille")
@@ -148,7 +148,7 @@ class LinkedListItemTest < Test::Unit::TestCase
     assert_equal '| foo, bar, dog, elephant |', ll.to_s
   end
 
-  def test_24b_remove_item_from_end_of_list
+  def test_25_remove_item_from_end_of_list
     ll = LinkedList.new
     ll.add_item("foo")
     ll.add_item("bar")
@@ -160,10 +160,10 @@ class LinkedListItemTest < Test::Unit::TestCase
     assert_equal '| foo, bar, grille, dog |', ll.to_s
   end
 
-  def test_25_remove_item_that_doesnt_exist
+  def test_26_remove_item_that_doesnt_exist
     ll = LinkedList.new
     assert_raise IndexError do
-      ll.remove(1)
+      ll.remove(0)
    end
   end
 
