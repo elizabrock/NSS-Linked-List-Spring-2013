@@ -1,12 +1,27 @@
 require 'test/unit'
 require 'linked_list'
 
-class LinkedListItemTest < Test::Unit::TestCase
+class LinkedListTest < Test::Unit::TestCase
 
   def test_06_add_item_get_item
     ll = LinkedList.new
+    payload = "foo"
+    ll.add_item(payload)
+    assert_equal(payload, ll.get(0))
+  end
+
+  def test_06b_add_item_get_item
+    ll = LinkedList.new
     ll.add_item("foo")
+    ll.add_item("bar")
     assert_equal("foo", ll.get(0))
+  end
+
+  def test_06c_add_item_get_item
+    ll = LinkedList.new
+    ll.add_item("foo")
+    ll.add_item("bar")
+    assert_equal("bar", ll.get(1))
   end
 
   def test_07_add_multiple_items_get_item
@@ -14,6 +29,7 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll.add_item("foo")
     ll.add_item("bar")
     ll.add_item("grille")
+    ll.add_item("zoo")
     assert_equal("grille", ll.get(2))
   end
 
@@ -21,6 +37,14 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll = LinkedList.new
     assert_raise IndexError do
       ll.get(1)
+    end
+  end
+
+  def test_08b_get_item_that_doesnt_exist
+    ll = LinkedList.new
+    ll.add_item("bar")
+    assert_raise IndexError do
+      ll.get(2)
     end
   end
 
@@ -34,6 +58,13 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll.add_item("bar")
     ll.add_item("grille")
     assert_equal( 3, ll.size)
+  end
+
+  def test_10b_list_size
+    ll = LinkedList.new
+    ll.add_item("foo")
+    ll.add_item("bar")
+    assert_equal( 2, ll.size)
   end
 
   def test_11_last_item_for_an_empty_list
