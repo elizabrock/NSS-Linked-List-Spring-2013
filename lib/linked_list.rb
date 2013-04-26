@@ -23,16 +23,17 @@ class LinkedList
   end
 
   def get_item(n)
+    raise IndexError if n < 0
     item = @first_item
     n.times do
       raise IndexError if item.nil?
       item = item.next_list_item
     end
-    item
+    item #LinkedListItem
   end
 
   def get(n)
-    get_item(n).payload
+    get_item(n).payload #payload
   end
 
   def last
@@ -106,17 +107,35 @@ class LinkedList
       i += 1
     end
   end
-
     # ========= Sorting Exercise ========== #
 
   def sorted?
+    item = @first_item
+    return true unless item
+    while item
+      return true if item.last?
+      return false if item > item.next_list_item
+      item = item.next_list_item
+    end
   end
 
   def sort
   end
 
-  # This is a helper I implemented
   def swap_with_next i
+    raise IndexError if i + 1 >= size
+    current_item = get_item(i)
+    next_item = get_item(i+1)
+
+    if i - 1 >= 0
+      previous_item = get_item( i-1)
+      previous_item.next_list_item = next_item
+    else
+      @first_item = next_item
+    end
+
+    current_item.next_list_item = next_item.next_list_item
+    next_item.next_list_item = current_item
   end
 
 end

@@ -31,7 +31,10 @@ class LinkedListItem
       return self.payload <=> other.payload
     end
 
-    ## You will have to implement the logic for what to do to compare types that aren't equal.
-    0
+    return 1 if self.payload.is_a? Symbol
+    return -1 if self.payload.is_a? Integer
+
+    # If I'm a string, use the fallback:
+    -1 * (other <=> self)
   end
 end
